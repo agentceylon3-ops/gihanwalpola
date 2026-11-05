@@ -462,153 +462,195 @@
 
 
 /*time table*/
-.seminar-schedule-section {
-    padding: 70px 20px;
-    background: #0f172a;
+.large-seminar-section {
+    padding: 80px 20px;
+    background: #090d16;
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
 }
 
-.seminar-container {
-    max-width: 1200px;
+.seminar-main-container {
+    max-width: 1300px;
     margin: 0 auto;
 }
 
-.seminar-header {
+.seminar-top-header {
     text-align: center;
-    margin-bottom: 45px;
+    margin-bottom: 55px;
 }
 
-.logos-wrapper {
+.logos-row {
     display: flex;
     justify-content: center;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 25px;
+    margin-bottom: 25px;
 }
 
-.institute-logo {
-    height: 60px;
+.brand-logo {
+    height: 75px;
     width: auto;
     object-fit: contain;
+   
     
-    
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 
-.seminar-badge {
-    background: rgba(249, 115, 22, 0.15);
-    color: #f97316; /* Orange Accent */
-    padding: 6px 16px;
+.top-badge {
+   
+    color: #f97316;
+    padding: 8px 20px;
     border-radius: 30px;
-    font-size: 0.85rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
-.seminar-header h2 {
-    font-size: 2.2rem;
-    margin-top: 15px;
-    margin-bottom: 10px;
+.seminar-top-header h2 {
+    font-size: 2.6rem;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.teacher-title-text {
+    font-size: 1.4rem;
+    color: #cbd5e1;
     font-weight: 700;
 }
 
-.teacher-name {
-    font-size: 1.2rem;
-    color: #cbd5e1;
-    font-weight: 600;
-}
-
-.teacher-role {
+.role-highlight {
     color: #f97316;
 }
 
-/* Schedule Grid */
-.schedule-grid {
+/* Grid Layout for Large Cards */
+.seminar-cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 25px;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 30px;
 }
 
-.schedule-card {
+.seminar-box {
     background: #1e293b;
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    border: 2px solid rgba(249, 115, 22, 0.3);
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.schedule-card:hover {
-    transform: translateY(-5px);
+.seminar-box:hover {
+    transform: translateY(-8px);
     border-color: #f97316;
 }
 
-.featured-card {
-    border: 2px solid #f97316;
+.featured-box {
+    grid-column: 1 / -1; /* 10 ශ්‍රේණිය පේළිය පුරාම ලොවට පෙන්වීමට */
+    border: 3px solid #f97316;
     background: linear-gradient(135deg, #1e293b 0%, #293548 100%);
 }
 
-.grade-badge-box {
+.box-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 18px;
-    border-bottom: 2px solid #334155;
-    padding-bottom: 12px;
+    margin-bottom: 22px;
+    border-bottom: 3px solid #334155;
+    padding-bottom: 16px;
 }
 
-.grade-badge-box h3 {
-    font-size: 1.4rem;
+.box-header h3 {
+    font-size: 1.8rem;
     color: #ffffff;
+    font-weight: 800;
+}
+
+.badge-free {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
     font-weight: 700;
 }
 
-.free-tag {
-    background: rgba(34, 197, 94, 0.15);
-    color: #22c55e; /* Green for Free */
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.special-tag {
-    background: rgba(249, 115, 22, 0.2);
-    color: #f97316; /* Orange */
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.session-details {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.session-details li {
-    font-size: 0.95rem;
-    color: #cbd5e1;
-    margin-bottom: 12px;
-    line-height: 1.5;
-}
-
-.online-only {
+.badge-special {
+    background: rgba(249, 115, 22, 0.25);
     color: #f97316;
-    font-size: 0.85rem;
-    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
 }
 
-/* Mobile Responsive Adjustments */
+.box-body {
+    font-size: 1.15rem;
+    color: #e2e8f0;
+    line-height: 1.8;
+}
+
+.box-body p {
+    margin-bottom: 8px;
+}
+
+.location-text {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px dashed #334155;
+    color: #cbd5e1;
+    font-size: 1.1rem;
+}
+
+.text-online-only {
+    color: #f97316;
+    font-weight: 700;
+}
+
+.special-session-block {
+    background: rgba(15, 23, 42, 0.6);
+    padding: 18px;
+    border-radius: 12px;
+    border-left: 5px solid #f97316;
+}
+
+.topic-highlight {
+    color: #f97316;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.fee-highlight {
+    color: #22c55e;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.badge-free-inline {
+    display: inline-block;
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-top: 6px;
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-    .seminar-header h2 {
-        font-size: 1.6rem;
-    }
-    .schedule-grid {
+    .seminar-cards-grid {
         grid-template-columns: 1fr;
+    }
+    .seminar-top-header h2 {
+        font-size: 2rem;
+    }
+    .featured-box {
+        grid-column: auto;
+    }
+    .seminar-box {
+        padding: 25px;
     }
 }
 
@@ -899,8 +941,8 @@
 }
 
 .social-btn {
-    width: 45px;
-    height: 45px;
+    width: 65px;
+    height: 65px;
     border-radius: 50%;
     background: #1e293b;
     color: #ffffff;
@@ -1020,10 +1062,11 @@
     </style>
 </head>
 <body>
-    
+ 
+    <!--
 <section class="hero-slider">
     
-    <!-- Background එකේ Slide වෙන Image ටික විතරයි මෙතන තියෙන්නේ -->
+  
     <div class="slides-wrapper">
         <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('s1.jpg');"></div>
         <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('s2.jpg');"></div>
@@ -1031,7 +1074,7 @@
         <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('s4.jpg');"></div>
     </div>
 
-    <!-- මේ Content එක Slider එක උඩ Fixed එකම තැන තියෙනවා (Image මාරු වුණාට මේවා මාරු වෙන්නේ නැහැ) -->
+   
     <div class="fixed-hero-content">
         
         <span class="tagline">අභිමානවත් දරු පරපුරකගේ පාරාදීසය</span>
@@ -1040,18 +1083,19 @@
         <a href="#register" class="btn-primary">අදම ලියාපදිංචි වන්න</a>
     </div>
 
-    <!-- Navigation Arrows -->
+    
     <button class="prev-btn" onclick="moveSlide(-1)">&#10094;</button>
     <button class="next-btn" onclick="moveSlide(1)">&#10095;</button>
 
-    <!-- Dots -->
+    
     <div class="dots-container">
         <span class="dot active" onclick="currentSlide(0)"></span>
         <span class="dot" onclick="currentSlide(1)"></span>
         <span class="dot" onclick="currentSlide(2)"></span>
         <span class="dot" onclick="currentSlide(3)"></span>
     </div>
-</section>
+</section> 
+-->
 
 <!-- About Teacher Section -->
 <section class="about-teacher-section">
@@ -1064,8 +1108,8 @@
 
         <!-- සර්ගේ විස්තර සහ සුදුසුකම් දාන Box එක -->
         <div class="teacher-info-box">
-            <span class="about-badge animate-on-scroll">විෂය මාලාව සරලව සහ නිවැරදිව</span>
-            <h2 class="animate-on-scroll">කැලණිය විශ්වවිද්‍යාලයේ උපාධිධාරී ගුරුතුමෙක්</h2>
+            <span class="about-badge animate-on-scroll" style="font-size: 20px;">ගණිතය ලේසියෙන්ම ඉගෙන ගමු</span>
+            <h2 class="animate-on-scroll" style="font-size: 18px;">කැලණිය විශ්වවිද්‍යාලයේ උපාධිධාරී ගුරුතුමෙක්</h2>
             <p class="teacher-bio animate-on-scroll">
                 වසර ගණනාවක ඉගැන්වීමේ පළපුරුද්ද සමඟින්, ගණිතය විෂය ඉතා සරලව, තර්කානුකූලව සහ විභාගයට උපරිම ලකුණු ලබාගත හැකි වන පරිදි සිසුන් වෙත සමීප කරන කැලණිය විශ්වවිද්‍යාලයේ ගෞරව උපාධිධාරී ගුරුතුමෙක් විසින් මෙම පන්ති මෙහෙයවනු ලබයි.
             </p>
@@ -1090,132 +1134,109 @@
 </section>
 
 
-<!-- Mathematics Practice Section -->
-<!-- Mathematics Practice Section -->
-<section class="math-quiz-section">
-    <div class="math-quiz-container">
+
+
+
+<!-- Large Seminar Schedule Section -->
+<section class="large-seminar-section">
+    <div class="seminar-main-container">
         
-        <div class="quiz-header animate-on-scroll">
-            <span class="quiz-badge">ගණිත ගැටළුව</span>
-            <h2>සරල සමීකරණ</h2>
-        </div>
-
-        <div class="quiz-card animate-on-scroll">
-            <!-- ගැටළුව -->
-            <p class="question-text">
-                ගැටළුව: <strong>3x = 15</strong> නම්, <strong>x</strong> හි අගය කොපමණද?
-            </p>
-
-            <!-- Input සහ Submit Area -->
-            <div class="quiz-input-group">
-                <input type="number" id="userAnswer" placeholder="ඔබේ පිළිතුර මෙතනින් ලියන්න..." />
-                <button onclick="checkMathAnswer()" class="submit-btn">පරීක්ෂා කරන්න</button>
+        <!-- Header Section -->
+        <div class="seminar-top-header">
+            <div class="logos-row">
+                <img src="logo.jpg" alt="Abhimansala Institute" class="brand-logo">
+                <img src="zoom.avif" alt="Zoom Online Class" class="brand-logo">
             </div>
-
-            <!-- ප්‍රතිඵලය පෙන්වන තැන -->
-            <div id="quizFeedback" class="feedback-box"></div>
-
-            <!-- පියවරෙන් පියවර විසඳුම (Submit කළ පසු පෙනේ) -->
-            <div id="stepByStepSolution" class="solution-box">
-                <h3>පියවරෙන් පියවර විසඳුම:</h3>
-                <p class="step">1. සමීකරණය: <strong>3x = 15</strong></p>
-                <p class="step">2. දෙපැත්තම 3න් බෙදන්න: <strong>x = 15 / 3</strong></p>
-                <p class="step-result">පිළිතුර: <strong>x = 5</strong></p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
-<!-- Seminar Schedule Section -->
-<section class="seminar-schedule-section">
-    <div class="seminar-container">
-        
-        <!-- Header & Logos -->
-        <div class="seminar-header animate-on-scroll">
-            <div class="logos-wrapper">
-                <img src="logo.jpg" alt="Abhimansala Institute" class="institute-logo">
-                <img src="zoom.avif" alt="Online Zoom Class" class="institute-logo">
-            </div>
-            <span class="seminar-badge">නොවැම්බර් මස විශේෂ සම්මන්ත්‍රණ මාලාව</span>
+            <span class="top-badge">නොවැම්බර් මස විශේෂ සම්මන්ත්‍රණ  කාලසටහන</span>
             <h2>තුන්වෙනි වාරෙ ගණන් පේපර් එකට හොඳම ලකුණක් ගන්න!</h2>
-            <p class="teacher-name">ගිහාන් වල්පොල <span class="teacher-role">| රජයේ පාසල් ගුරුවරයෙකි</span></p>
+            <p class="teacher-title-text">ගිහාන් වල්පොල <span class="role-highlight">| රජයේ පාසල් ආචාර්ය</span></p>
         </div>
 
-        <!-- Grades Cards Grid -->
-        <div class="schedule-grid">
+        <!-- Cards Container (Large & Clear Grid) -->
+        <div class="seminar-cards-grid">
             
             <!-- 6 ශ්‍රේණිය -->
-            <div class="schedule-card animate-on-scroll">
-                <div class="grade-badge-box">
+            <div class="seminar-box">
+                <div class="box-header">
                     <h3>6 ශ්‍රේණිය</h3>
-                    <span class="free-tag">නොමිලේ</span>
+                    <span class="badge-free">නොමිලේ</span>
                 </div>
-                <ul class="session-details">
-                    <li><strong> 29 ඉරිදා</strong></li>
-                    <li> ප.ව 1.30 - 4.30</li>
-                    <li> කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</li>
-                </ul>
+                <div class="box-body">
+                    <p>දිනය: <strong>29 ඉරිදා</strong></p>
+                    <p>වේලාව: <strong>ප.ව 1.30 සිට 4.30 දක්වා</strong></p>
+                    <p class="location-text">ස්ථානය: <strong>කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</strong></p>
+                </div>
             </div>
 
             <!-- 7 ශ්‍රේණිය -->
-            <div class="schedule-card animate-on-scroll">
-                <div class="grade-badge-box">
+            <div class="seminar-box">
+                <div class="box-header">
                     <h3>7 ශ්‍රේණිය</h3>
-                    <span class="free-tag">නොමිලේ</span>
+                    <span class="badge-free">නොමිලේ</span>
                 </div>
-                <ul class="session-details">
-                    <li><strong> 29 ඉරිදා</strong></li>
-                    <li> ප.ව 4.30 - 7.30</li>
-                    <li> කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</li>
-                </ul>
+                <div class="box-body">
+                    <p>දිනය: <strong>29 ඉරිදා</strong></p>
+                    <p>වේලාව: <strong>ප.ව 4.30 සිට 7.30 දක්වා</strong></p>
+                    <p class="location-text">ස්ථානය: <strong>කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</strong></p>
+                </div>
             </div>
 
             <!-- 8 ශ්‍රේණිය -->
-            <div class="schedule-card animate-on-scroll">
-                <div class="grade-badge-box">
+            <div class="seminar-box">
+                <div class="box-header">
                     <h3>8 ශ්‍රේණිය</h3>
-                    <span class="free-tag">නොමිලේ</span>
+                    <span class="badge-free">නොමිලේ</span>
                 </div>
-                <ul class="session-details">
-                    <li><strong> 24 අඟහරුවාදා</strong> ප.ව 1.00 - 5.00</li>
-                    <li><strong> 26 බ්‍රහස්පතින්දා</strong> ප.ව 5.30 - 8.00</li>
-                    <li> කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</li>
-                </ul>
+                <div class="box-body">
+                    <div class="session-group">
+                        <p>දිනය: <strong>24 අඟහරුවාදා</strong></p>
+                        <p>වේලාව: <strong>ප.ව 1.00 සිට 5.00 දක්වා</strong></p>
+                    </div>
+                    <div class="session-group" style="margin-top: 15px;">
+                        <p>දිනය: <strong>26 බ්‍රහස්පතින්දා</strong></p>
+                        <p>වේලාව: <strong>ප.ව 5.30 සිට 8.00 දක්වා</strong></p>
+                    </div>
+                    <p class="location-text" style="margin-top: 15px;">ස්ථානය: <strong>කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</strong></p>
+                </div>
             </div>
 
             <!-- 9 ශ්‍රේණිය -->
-            <div class="schedule-card animate-on-scroll">
-                <div class="grade-badge-box">
+            <div class="seminar-box">
+                <div class="box-header">
                     <h3>9 ශ්‍රේණිය</h3>
-                    <span class="free-tag">නොමිලේ</span>
+                    <span class="badge-free">නොමිලේ</span>
                 </div>
-                <ul class="session-details">
-                    <li><strong> 24 අඟහරුවාදා</strong> පෙ.ව 8.00 - 1.00</li>
-                    <li><strong> 26 බ්‍රහස්පතින්දා</strong> ප.ව 8.30 - 11.00 <span class="online-only">(Online පමණි)</span></li>
-                    <li> කෝරළඉම අභිමංසල ආයතනයේ සහ Online</li>
-                </ul>
+                <div class="box-body">
+                    <div class="session-group">
+                        <p>දිනය: <strong>24 අඟහරුවාදා</strong></p>
+                        <p>වේලාව: <strong>පෙ.ව 8.00 සිට 1.00 දක්වා</strong></p>
+                    </div>
+                    <div class="session-group" style="margin-top: 15px;">
+                        <p>දිනය: <strong>26 බ්‍රහස්පතින්දා</strong></p>
+                        <p>වේලාව: <strong>ප.ව 8.30 සිට 11.00 දක්වා</strong> <span class="text-online-only">(Online පමණි)</span></p>
+                    </div>
+                    <p class="location-text" style="margin-top: 15px;">ස්ථානය: <strong>කෝරළඉම අභිමංසල ආයතනයේ සහ Online</strong></p>
+                </div>
             </div>
 
-            <!-- 10 ශ්‍රේණිය (Featured Card) -->
-            <div class="schedule-card featured-card animate-on-scroll">
-                <div class="grade-badge-box">
+            <!-- 10 ශ්‍රේණිය (Featured Large Box) -->
+            <div class="seminar-box featured-box">
+                <div class="box-header">
                     <h3>10 ශ්‍රේණිය</h3>
-                    <span class="special-tag">විශේෂ සම්මන්ත්‍රණ 2ක්</span>
+                    <span class="badge-special">විශේෂ සම්මන්ත්‍රණ දෙකක්</span>
                 </div>
-                <ul class="session-details">
-                    <li>
-                        <strong> 8 ඉරිදා (ප.ව 12.00 - 5.00)</strong><br>
-                        ජ්‍යාමිතිය රචනා ප්‍රශ්න සම්මන්ත්‍රණය<br>
-                        <span class="free-tag">සම්පූර්ණයෙන්ම නොමිලේ</span>
-                    </li>
-                    <li>
-                        <strong> 15 ඉරිදා (පෙ.ව 8.00 - ප.ව 5.00)</strong><br>
-                        අය කිරීම: රු. 200
-                    </li>
-                    <li> කෝරළඉම අභිමංසල ආයතනයේ සහ Online (ලංකාවටම)</li>
-                </ul>
+                <div class="box-body">
+                    <div class="session-group special-session-block">
+                        <p>දිනය: <strong>8 වෙනි ඉරිදා</strong> (ප.ව 12.00 සිට 5.00 දක්වා)</p>
+                        <p class="topic-highlight">විෂය: <strong>ජ්‍යාමිතිය රචනා ප්‍රශ්න සම්මන්ත්‍රණය</strong></p>
+                        <p class="badge-free-inline">සම්පූර්ණයෙන්ම නොමිලේ</p>
+                    </div>
+                    <div class="session-group special-session-block" style="margin-top: 20px;">
+                        <p>දිනය: <strong>15 වෙනි ඉරිදා</strong> (පෙ.ව 8.00 සිට ප.ව 5.00 දක්වා)</p>
+                        <p class="fee-highlight">අය කිරීම: <strong>රු. 200</strong></p>
+                    </div>
+                    <p class="location-text" style="margin-top: 20px;">ස්ථානය: <strong>කෝරළඉම අභිමංසල ආයතනයේ සහ Online (ලංකාවටම)</strong></p>
+                </div>
             </div>
 
         </div>
@@ -1357,7 +1378,7 @@
         <!-- Teacher Info & Quick Intro -->
         <div class="footer-brand animate-on-scroll">
             <h3>ගිහාන් වල්පොල</h3>
-            <p>ගණිතය - රජයේ පාසල් ආචාර්ය | කෝරළඉම අභිමංසල ආයතනය</p>
+            <p>සර් ගැන තව විස්තර දැනගන්න මෙම සමාජමාද්‍ය භාවිතා කරන්න</p>
         </div>
 
         <!-- Social Media Links (Clickable Icons) -->
@@ -1389,7 +1410,7 @@
     <div class="footer-bottom animate-on-scroll">
         <p>© 2026 Gihan Walpola. All Rights Reserved.</p>
         <p class="developer-credits">
-            Designed & Developed by <span class="brand-name">Home Artist</span> 
+            Designed & Developed by <span class="brand-name">Home Artist</span> <br>
             <a href="tel:0781227941" class="dev-phone"> 078 122 7941</a>
         </p>
     </div>
