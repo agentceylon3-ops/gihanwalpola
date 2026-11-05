@@ -1,0 +1,1534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gihan | Sir</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero-slider {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-height: 600px;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Background Slider */
+.slides-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Slide වෙන එකෙන් පිටත Fixed Text Overlay එක */
+.fixed-hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5; /* Images වලට උඩින් පේන්න */
+    text-align: center;
+    color: #ffffff;
+    width: 90%;
+    max-width: 800px;
+    pointer-events: auto;
+}
+
+.slider-logo {
+    max-width: 110px;
+    height: auto;
+    margin-bottom: 15px;
+    filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.5));
+}
+
+.tagline {
+    display: block;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #ffcf40;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.teacher-name {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
+
+.subject {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 25px;
+    color: #f0f0f0;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 32px;
+    background: #ffcf40;
+    color: #111;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 207, 64, 0.4);
+}
+
+.btn-primary:hover {
+    background: #ffffff;
+    color: #111;
+    transform: translateY(-3px);
+}
+
+/* Navigation Controls */
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.4);
+    color: #fff;
+    border: none;
+    font-size: 24px;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s ease;
+    z-index: 10;
+}
+
+.prev-btn { left: 20px; }
+.next-btn { right: 20px; }
+
+.prev-btn:hover, .next-btn:hover {
+    background: rgba(255, 207, 64, 0.8);
+    color: #111;
+}
+
+.dots-container {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active, .dot:hover {
+    background: #ffcf40;
+    width: 30px;
+    border-radius: 10px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 75vh;
+    }
+
+    .teacher-name {
+        font-size: 2rem;
+    }
+
+    .subject {
+        font-size: 1.1rem;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
+    }
+
+    .slider-logo {
+        max-width: 85px;
+    }
+
+    .prev-btn, .next-btn {
+        padding: 10px 14px;
+        font-size: 18px;
+    }
+}
+
+
+
+/*about section*/
+/* About Teacher Section Styles */
+.about-teacher-section {
+    padding: 90px 20px;
+    background: #111111; /* Dark Theme එකට ගැළපෙන පසුබිමක් */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+}
+
+.about-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+/* Teacher Photo Box */
+.teacher-img-box {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.teacher-img {
+    width: 100%;
+    max-width: 400px;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(255, 207, 64, 0.25);
+    border: 3px solid #ffcf40; /* Gold Border එකක් */
+}
+
+/* Teacher Info Box */
+.teacher-info-box {
+    flex: 1.2;
+    min-width: 300px;
+}
+
+.about-badge {
+    display: inline-block;
+    background: rgba(255, 207, 64, 0.15);
+    color: #ffcf40;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.teacher-info-box h2 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.3;
+}
+
+.teacher-bio {
+    font-size: 1.05rem;
+    color: #d0d0d0;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* Highlights List */
+.teacher-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #f0f0f0;
+}
+
+.highlight-item .icon {
+    background: #ffcf40;
+    color: #111;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .about-teacher-section {
+        padding: 50px 15px;
+    }
+
+    .about-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 35px;
+    }
+
+    .teacher-info-box h2 {
+        font-size: 1.8rem;
+    }
+
+    .teacher-highlights {
+        align-items: flex-start;
+    }
+
+    .teacher-img {
+        height: 380px;
+    }
+}
+
+
+
+/*maths quiz*/
+.math-quiz-section {
+    padding: 60px 20px;
+    background: #0f172a;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+.math-quiz-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.quiz-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.quiz-badge {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316; /* Orange Color */
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.quiz-header h2 {
+    font-size: 1.8rem;
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.quiz-card {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 2px solid #f97316; /* Orange Border */
+}
+
+.question-text {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.quiz-input-group {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.quiz-input-group input {
+    flex: 1;
+    padding: 12px 16px;
+    background: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.quiz-input-group input:focus {
+    border-color: #f97316; /* Orange Focus */
+}
+
+.submit-btn {
+    background: #f97316; /* Orange Button */
+    color: #ffffff;
+    border: none;
+    padding: 12px 24px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: #ea580c;
+}
+
+/* Feedback Box Styling */
+.feedback-box {
+    margin-top: 15px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: none;
+}
+
+.feedback-box.correct {
+    background: rgba(34, 197, 94, 0.2);
+    color: #22c55e; /* Green for Correct */
+    border: 1px solid #22c55e;
+    display: block;
+}
+
+.feedback-box.incorrect {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444; /* Red for Incorrect */
+    border: 1px solid #ef4444;
+    display: block;
+}
+
+/* Solution Box Styling */
+.solution-box {
+    margin-top: 20px;
+    background: #0f172a;
+    border-left: 4px solid #22c55e; /* Green Left Border */
+    padding: 15px 20px;
+    border-radius: 0 8px 8px 0;
+    display: none;
+}
+
+.solution-box h3 {
+    font-size: 1.1rem;
+    color: #22c55e; /* Green Title */
+    margin-bottom: 10px;
+}
+
+.solution-box .step {
+    color: #cbd5e1;
+    margin-bottom: 6px;
+}
+
+.solution-box .step-result {
+    color: #22c55e;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 500px) {
+    .quiz-input-group {
+        flex-direction: column;
+    }
+    .submit-btn {
+        width: 100%;
+    }
+}
+
+
+
+/*time table*/
+.seminar-schedule-section {
+    padding: 70px 20px;
+    background: #0f172a;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+.seminar-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.seminar-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.logos-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.institute-logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    
+    
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.seminar-badge {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316; /* Orange Accent */
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.seminar-header h2 {
+    font-size: 2.2rem;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.teacher-name {
+    font-size: 1.2rem;
+    color: #cbd5e1;
+    font-weight: 600;
+}
+
+.teacher-role {
+    color: #f97316;
+}
+
+/* Schedule Grid */
+.schedule-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+.schedule-card {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.schedule-card:hover {
+    transform: translateY(-5px);
+    border-color: #f97316;
+}
+
+.featured-card {
+    border: 2px solid #f97316;
+    background: linear-gradient(135deg, #1e293b 0%, #293548 100%);
+}
+
+.grade-badge-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    border-bottom: 2px solid #334155;
+    padding-bottom: 12px;
+}
+
+.grade-badge-box h3 {
+    font-size: 1.4rem;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.free-tag {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e; /* Green for Free */
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.special-tag {
+    background: rgba(249, 115, 22, 0.2);
+    color: #f97316; /* Orange */
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.session-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.session-details li {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    margin-bottom: 12px;
+    line-height: 1.5;
+}
+
+.online-only {
+    color: #f97316;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .seminar-header h2 {
+        font-size: 1.6rem;
+    }
+    .schedule-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+/*gallary*/
+.teacher-gallery-section {
+    padding: 75px 20px;
+    background: #0f172a; /* Dark theme background */
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+.gallery-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.gallery-badge {
+    background: rgba(249, 115, 22, 0.15);
+    color: #f97316; /* Orange Accent */
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gallery-header h2 {
+    font-size: 2.2rem;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.gallery-header p {
+    color: #cbd5e1;
+    font-size: 1.05rem;
+}
+
+/* Gallery Grid Layout (Modern Responsive Grid) */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    height: 280px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border: 2px solid rgba(249, 115, 22, 0.2);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+/* మొదటి ෆොටෝ එක ටිකක් ලොකු කර පෙන්වීමට (Featured Photo) */
+.large-item {
+    grid-column: span 2;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+/* Hover Effect (ෆොටෝ එක උඩින් මවුස් එක ගිය විට) */
+.gallery-item:hover {
+    transform: translateY(-6px);
+    border-color: #f97316;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+/* Image Overlay text */
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px;
+    background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+    .large-item {
+        grid-column: span 1;
+    }
+    .gallery-item {
+        height: 250px;
+    }
+    .gallery-header h2 {
+        font-size: 1.7rem;
+    }
+}
+
+
+
+/*register form*/
+.registration-section {
+    padding: 75px 20px;
+    background: #0f172a;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+}
+
+.reg-container {
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.reg-header {
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.reg-badge {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e; /* Green Tint */
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.reg-header h2 {
+    font-size: 2rem;
+    margin-top: 12px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.reg-header p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.reg-card {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 2px solid #f97316; /* Orange Border */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #f1f5f9;
+}
+
+.form-group input, 
+.form-group select {
+    width: 100%;
+    padding: 13px 16px;
+    background: #0f172a;
+    border: 2px solid #334155;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: #f97316; /* Orange Focus */
+}
+
+/* WhatsApp Submit Button Style */
+.whatsapp-btn {
+    width: 100%;
+    background: #25d366; /* WhatsApp Green */
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+}
+
+.whatsapp-btn:hover {
+    background: #22bf5b;
+    transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .reg-card {
+        padding: 20px;
+    }
+    .reg-header h2 {
+        font-size: 1.6rem;
+    }
+}
+
+
+
+/*footer*/
+.site-footer {
+    background: #090d16; /* Deep Dark Background */
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    padding-top: 50px;
+    border-top: 2px solid #f97316; /* Orange Top Border */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 35px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.footer-brand h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.footer-brand p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.social-media-wrapper {
+    text-align: right;
+}
+
+.social-title {
+    font-size: 0.9rem;
+    color: #f97316;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #1e293b;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hover Colors for Icons */
+.social-btn.tiktok:hover {
+    background: #000000;
+    color: #ff0050;
+    box-shadow: 0 0 15px rgba(255, 0, 80, 0.5);
+    transform: translateY(-3px);
+}
+
+.social-btn.facebook:hover {
+    background: #1877f2;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.5);
+    transform: translateY(-3px);
+}
+
+.social-btn.whatsapp:hover {
+    background: #25d366;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(37, 211, 102, 0.5);
+    transform: translateY(-3px);
+}
+
+/* Footer Bottom Credit Bar */
+.footer-bottom {
+    background: #05080e;
+    padding: 18px 20px;
+    text-align: center;
+    border-top: 1px solid #1e293b;
+    font-size: 0.88rem;
+    color: #94a3b8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.footer-bottom p {
+    margin: 4px auto;
+}
+
+.developer-credits {
+    color: #cbd5e1;
+}
+
+.brand-name {
+    color: #f97316; /* Home Artist Orange Highlight */
+    font-weight: 700;
+}
+
+.dev-phone {
+    color: #22c55e; /* Green Phone Accent */
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 8px;
+    transition: color 0.3s ease;
+}
+
+.dev-phone:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .social-media-wrapper {
+        text-align: center;
+    }
+
+    .social-icons {
+        justify-content: center;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 6px;
+    }
+}
+
+
+
+/*animete web style*/
+/* Scroll Animation Base Styles */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(40px); /* පහළ සිට ඉහළට මතු වීමට */
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    will-change: opacity, transform;
+}
+
+/* Scroll වූ පසු Active class එක එකතු වූ විට පේන ආකාරය */
+.animate-on-scroll.fade-in-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+
+    </style>
+</head>
+<body>
+    
+<section class="hero-slider">
+    
+    <!-- Background එකේ Slide වෙන Image ටික විතරයි මෙතන තියෙන්නේ -->
+    <div class="slides-wrapper">
+        <div class="slide active" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('s1.jpg');"></div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('s2.jpg');"></div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('s3.jpg');"></div>
+        <div class="slide" style="background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('s4.jpg');"></div>
+    </div>
+
+    <!-- මේ Content එක Slider එක උඩ Fixed එකම තැන තියෙනවා (Image මාරු වුණාට මේවා මාරු වෙන්නේ නැහැ) -->
+    <div class="fixed-hero-content">
+        
+        <span class="tagline">අභිමානවත් දරු පරපුරකගේ පාරාදීසය</span>
+        <h1 class="teacher-name">ගිහාන් වල්පොල</h1>
+        <p class="subject">සාමාන්‍ය පෙළ  ගණිතය</p>
+        <a href="#register" class="btn-primary">අදම ලියාපදිංචි වන්න</a>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button class="prev-btn" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="next-btn" onclick="moveSlide(1)">&#10095;</button>
+
+    <!-- Dots -->
+    <div class="dots-container">
+        <span class="dot active" onclick="currentSlide(0)"></span>
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+</section>
+
+<!-- About Teacher Section -->
+<section class="about-teacher-section">
+    <div class="about-container">
+        
+        <!-- සර්ගේ ෆොටෝ එක දාන Box එක -->
+        <div class="teacher-img-box animate-on-scroll">
+            <img src="s5.jpg" alt="Mathematics Teacher" class="teacher-img">
+        </div>
+
+        <!-- සර්ගේ විස්තර සහ සුදුසුකම් දාන Box එක -->
+        <div class="teacher-info-box">
+            <span class="about-badge animate-on-scroll">විෂය මාලාව සරලව සහ නිවැරදිව</span>
+            <h2 class="animate-on-scroll">කැලණිය විශ්වවිද්‍යාලයේ උපාධිධාරී ගුරුතුමෙක්</h2>
+            <p class="teacher-bio animate-on-scroll">
+                වසර ගණනාවක ඉගැන්වීමේ පළපුරුද්ද සමඟින්, ගණිතය විෂය ඉතා සරලව, තර්කානුකූලව සහ විභාගයට උපරිම ලකුණු ලබාගත හැකි වන පරිදි සිසුන් වෙත සමීප කරන කැලණිය විශ්වවිද්‍යාලයේ ගෞරව උපාධිධාරී ගුරුතුමෙක් විසින් මෙම පන්ති මෙහෙයවනු ලබයි.
+            </p>
+            
+            <div class="teacher-highlights animate-on-scroll">
+                <div class="highlight-item animate-on-scroll">
+                    <span class="icon ">&#10004;</span>
+                    <span>කැලණිය විශ්වවිද්‍යාලයේ උපාධිධාරී ගුරුතුමෙක්</span>
+                </div>
+                <div class="highlight-item animate-on-scroll">
+                    <span class="icon ">&#10004;</span>
+                    <span>ගණිතය විෂය විශේෂඥ (Mathematics Expert)</span>
+                </div>
+                <div class="highlight-item animate-on-scroll">
+                    <span class="icon">&#10004;</span>
+                    <span>විශිෂ්ට ප්‍රතිඵල බිහි කළ ඔන්ලයින් හා සාමාන්‍ය පන්ති</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Mathematics Practice Section -->
+<!-- Mathematics Practice Section -->
+<section class="math-quiz-section">
+    <div class="math-quiz-container">
+        
+        <div class="quiz-header animate-on-scroll">
+            <span class="quiz-badge">ගණිත ගැටළුව</span>
+            <h2>සරල සමීකරණ</h2>
+        </div>
+
+        <div class="quiz-card animate-on-scroll">
+            <!-- ගැටළුව -->
+            <p class="question-text">
+                ගැටළුව: <strong>3x = 15</strong> නම්, <strong>x</strong> හි අගය කොපමණද?
+            </p>
+
+            <!-- Input සහ Submit Area -->
+            <div class="quiz-input-group">
+                <input type="number" id="userAnswer" placeholder="ඔබේ පිළිතුර මෙතනින් ලියන්න..." />
+                <button onclick="checkMathAnswer()" class="submit-btn">පරීක්ෂා කරන්න</button>
+            </div>
+
+            <!-- ප්‍රතිඵලය පෙන්වන තැන -->
+            <div id="quizFeedback" class="feedback-box"></div>
+
+            <!-- පියවරෙන් පියවර විසඳුම (Submit කළ පසු පෙනේ) -->
+            <div id="stepByStepSolution" class="solution-box">
+                <h3>පියවරෙන් පියවර විසඳුම:</h3>
+                <p class="step">1. සමීකරණය: <strong>3x = 15</strong></p>
+                <p class="step">2. දෙපැත්තම 3න් බෙදන්න: <strong>x = 15 / 3</strong></p>
+                <p class="step-result">පිළිතුර: <strong>x = 5</strong></p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Seminar Schedule Section -->
+<section class="seminar-schedule-section">
+    <div class="seminar-container">
+        
+        <!-- Header & Logos -->
+        <div class="seminar-header animate-on-scroll">
+            <div class="logos-wrapper">
+                <img src="logo.jpg" alt="Abhimansala Institute" class="institute-logo">
+                <img src="zoom.avif" alt="Online Zoom Class" class="institute-logo">
+            </div>
+            <span class="seminar-badge">නොවැම්බර් මස විශේෂ සම්මන්ත්‍රණ මාලාව</span>
+            <h2>තුන්වෙනි වාරෙ ගණන් පේපර් එකට හොඳම ලකුණක් ගන්න!</h2>
+            <p class="teacher-name">ගිහාන් වල්පොල <span class="teacher-role">| රජයේ පාසල් ගුරුවරයෙකි</span></p>
+        </div>
+
+        <!-- Grades Cards Grid -->
+        <div class="schedule-grid">
+            
+            <!-- 6 ශ්‍රේණිය -->
+            <div class="schedule-card animate-on-scroll">
+                <div class="grade-badge-box">
+                    <h3>6 ශ්‍රේණිය</h3>
+                    <span class="free-tag">නොමිලේ</span>
+                </div>
+                <ul class="session-details">
+                    <li><strong> 29 ඉරිදා</strong></li>
+                    <li> ප.ව 1.30 - 4.30</li>
+                    <li> කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</li>
+                </ul>
+            </div>
+
+            <!-- 7 ශ්‍රේණිය -->
+            <div class="schedule-card animate-on-scroll">
+                <div class="grade-badge-box">
+                    <h3>7 ශ්‍රේණිය</h3>
+                    <span class="free-tag">නොමිලේ</span>
+                </div>
+                <ul class="session-details">
+                    <li><strong> 29 ඉරිදා</strong></li>
+                    <li> ප.ව 4.30 - 7.30</li>
+                    <li> කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</li>
+                </ul>
+            </div>
+
+            <!-- 8 ශ්‍රේණිය -->
+            <div class="schedule-card animate-on-scroll">
+                <div class="grade-badge-box">
+                    <h3>8 ශ්‍රේණිය</h3>
+                    <span class="free-tag">නොමිලේ</span>
+                </div>
+                <ul class="session-details">
+                    <li><strong> 24 අඟහරුවාදා</strong> ප.ව 1.00 - 5.00</li>
+                    <li><strong> 26 බ්‍රහස්පතින්දා</strong> ප.ව 5.30 - 8.00</li>
+                    <li> කෝරළඉම අභිමංසල ආයතනයේ භෞතිකව සහ Online</li>
+                </ul>
+            </div>
+
+            <!-- 9 ශ්‍රේණිය -->
+            <div class="schedule-card animate-on-scroll">
+                <div class="grade-badge-box">
+                    <h3>9 ශ්‍රේණිය</h3>
+                    <span class="free-tag">නොමිලේ</span>
+                </div>
+                <ul class="session-details">
+                    <li><strong> 24 අඟහරුවාදා</strong> පෙ.ව 8.00 - 1.00</li>
+                    <li><strong> 26 බ්‍රහස්පතින්දා</strong> ප.ව 8.30 - 11.00 <span class="online-only">(Online පමණි)</span></li>
+                    <li> කෝරළඉම අභිමංසල ආයතනයේ සහ Online</li>
+                </ul>
+            </div>
+
+            <!-- 10 ශ්‍රේණිය (Featured Card) -->
+            <div class="schedule-card featured-card animate-on-scroll">
+                <div class="grade-badge-box">
+                    <h3>10 ශ්‍රේණිය</h3>
+                    <span class="special-tag">විශේෂ සම්මන්ත්‍රණ 2ක්</span>
+                </div>
+                <ul class="session-details">
+                    <li>
+                        <strong> 8 ඉරිදා (ප.ව 12.00 - 5.00)</strong><br>
+                        ජ්‍යාමිතිය රචනා ප්‍රශ්න සම්මන්ත්‍රණය<br>
+                        <span class="free-tag">සම්පූර්ණයෙන්ම නොමිලේ</span>
+                    </li>
+                    <li>
+                        <strong> 15 ඉරිදා (පෙ.ව 8.00 - ප.ව 5.00)</strong><br>
+                        අය කිරීම: රු. 200
+                    </li>
+                    <li> කෝරළඉම අභිමංසල ආයතනයේ සහ Online (ලංකාවටම)</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- Teacher & Students Photo Gallery Section -->
+<section class="teacher-gallery-section">
+    <div class="gallery-container">
+        
+        <!-- Section Header -->
+        <div class="gallery-header animate-on-scroll">
+            <span class="gallery-badge">පන්ති කාමර සජීවී අවස්ථා</span>
+            <h2>සිසු සිසුවියන් සමඟ ගිහාන් සර්</h2>
+            <p>අභිමංසල ආයතනයේ සහ සම්මන්ත්‍රණ වලදී ගත් විශේෂ අවස්ථා</p>
+        </div>
+
+        <!-- Gallery Grid (Photos 5 ක් සඳහා Grid Layout එක) -->
+        <div class="gallery-grid ">
+            
+            <!-- Photo 1 -->
+            <div class="gallery-item large-item animate-on-scroll">
+                <img src="1.jpg" alt="Gihan Sir with Students 1">
+                <div class="gallery-overlay">
+                    <span>සම්මන්ත්‍රණ අවස්ථාවක්</span>
+                </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="gallery-item animate-on-scroll">
+                <img src="2.jpg" alt="Gihan Sir with Students 2">
+                <div class="gallery-overlay">
+                    <span>පන්ති කාමරය තුළ</span>
+                </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="gallery-item animate-on-scroll">
+                <img src="3.jpg" alt="Gihan Sir with Students 3">
+                <div class="gallery-overlay">
+                    <span>සාකච්ඡා මණ්ඩපය</span>
+                </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="gallery-item animate-on-scroll">
+                <img src="4.jpg" alt="Gihan Sir with Students 4">
+                <div class="gallery-overlay">
+                    <span>විශේෂ දේශනයක්</span>
+                </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="gallery-item animate-on-scroll">
+                <img src="5.jpg" alt="Gihan Sir with Students 5">
+                <div class="gallery-overlay">
+                    <span>සාර්ථක ප්‍රතිඵල සමගින්</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Student Registration Form Section -->
+<section class="registration-section">
+    <div class="reg-container">
+        
+        <div class="reg-header animate-on-scroll">
+            <span class="reg-badge">නොවැම්බර් පන්ති සඳහා ලියාපදිංචිය</span>
+            <h2>ගිහාන් සර්ගේ පන්ති වලට දැන්ම ලියාපදිංචි වන්න</h2>
+            <p>පහත පෝරමය පුරවා Submit බොත්තම ඔබන්න. ඔබගේ විස්තර සෘජුවම සර්ගේ WhatsApp අංකයට යැවෙනු ඇත.</p>
+        </div>
+
+        <div class="reg-card">
+            <form id="whatsappForm" onsubmit="sendToWhatsApp(event)">
+                
+                <!-- ළමයාගේ නම -->
+                <div class="form-group animate-on-scroll">
+                    <label for="studentName">ශිෂ්‍යයාගේ සම්පූර්ණ නම:</label>
+                    <input type="text" id="studentName" placeholder="උදා: කාවින්ද දිල්ෂාන්" required>
+                </div>
+
+                <!-- පාසල -->
+                <div class="form-group animate-on-scroll">
+                    <label for="studentSchool">පාසල:</label>
+                    <input type="text" id="studentSchool" placeholder="උදා: කොළඹ රාජකීය විද්‍යාලය" required>
+                </div>
+
+                <!-- පන්තිය / ශ්‍රේණිය -->
+                <div class="form-group animate-on-scroll">
+                    <label for="studentGrade">පන්තිය (ශ්‍රේණිය):</label>
+                    <select id="studentGrade" required>
+                        <option value="" disabled selected>ශ්‍රේණිය තෝරන්න</option>
+                        <option value="6 ශ්‍රේණිය">6 ශ්‍රේණිය</option>
+                        <option value="7 ශ්‍රේණිය">7 ශ්‍රේණිය</option>
+                        <option value="8 ශ්‍රේණිය">8 ශ්‍රේණිය</option>
+                        <option value="9 ශ්‍රේණිය">9 ශ්‍රේණිය</option>
+                        <option value="10 ශ්‍රේණිය">10 ශ්‍රේණිය</option>
+                        <option value="11 ශ්‍රේණිය">11 ශ්‍රේණිය</option>
+                    </select>
+                </div>
+
+                <!-- සහභාගී විය හැකි ආකාරය -->
+                <div class="form-group animate-on-scroll">
+                    <label for="attendanceMode">සහභාගී වන ආකාරය:</label>
+                    <select id="attendanceMode" required>
+                        <option value="" disabled selected>ක්‍රමය තෝරන්න</option>
+                        <option value="Physical (ආයතනයට පැමිණ)">Physical (කෝරළඉම අභිමංසල ආයතනයට පැමිණ)</option>
+                        <option value="Online (Zoom හරහා)">Online (Zoom හරහා)</option>
+                        
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="whatsapp-btn animate-on-scroll">
+                    <span class="btn-icon"></span> WhatsApp හරහා ලියාපදිංචි වන්න
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Font Awesome CDN for Social Media Icons (Head එකේ නැත්නම් මෙතනින් load වෙනවා) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<!-- Footer Section -->
+<footer class="site-footer">
+    <div class="footer-container">
+        
+        <!-- Teacher Info & Quick Intro -->
+        <div class="footer-brand animate-on-scroll">
+            <h3>ගිහාන් වල්පොල</h3>
+            <p>ගණිතය - රජයේ පාසල් ආචාර්ය | කෝරළඉම අභිමංසල ආයතනය</p>
+        </div>
+
+        <!-- Social Media Links (Clickable Icons) -->
+        <div class="social-media-wrapper animate-on-scroll">
+            <p class="social-title">අප හා සම්බන්ධ වන්න:</p>
+            <div class="social-icons">
+                
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@gihan_walpola?_r=1&_t=ZS-9B9Tx8QN5aW" target="_blank" rel="noopener noreferrer" class="social-btn tiktok" title="TikTok">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/share/1a4x8btoa3/" target="_blank" rel="noopener noreferrer" class="social-btn facebook" title="Facebook Page">
+                    <i class="fa-brands fa-facebook-f"></i>
+                </a>
+
+                <!-- WhatsApp Direct Chat -->
+                <a href="https://wa.me/94772977291" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp" title="WhatsApp Chat">
+                    <i class="fa-brands fa-whatsapp"></i>
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Developer Attribution Line (Home Artist Branding) -->
+    <div class="footer-bottom animate-on-scroll">
+        <p>© 2026 Gihan Walpola. All Rights Reserved.</p>
+        <p class="developer-credits">
+            Designed & Developed by <span class="brand-name">Home Artist</span> 
+            <a href="tel:0781227941" class="dev-phone"> 078 122 7941</a>
+        </p>
+    </div>
+</footer>
+
+
+<script>
+    //main img anime
+    let currentSlideIndex = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+let slideInterval;
+
+function showSlide(index) {
+    if (index >= slides.length) currentSlideIndex = 0;
+    if (index < 0) currentSlideIndex = slides.length - 1;
+
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    slides[currentSlideIndex].classList.add('active');
+    dots[currentSlideIndex].classList.add('active');
+}
+
+function moveSlide(step) {
+    currentSlideIndex += step;
+    showSlide(currentSlideIndex);
+    resetAutoSlide();
+}
+
+function currentSlide(index) {
+    currentSlideIndex = index;
+    showSlide(currentSlideIndex);
+    resetAutoSlide();
+}
+
+// තත්පර 5කට වතාවක් background image එක මාරු වෙනවා
+function startAutoSlide() {
+    slideInterval = setInterval(() => {
+        currentSlideIndex++;
+        showSlide(currentSlideIndex);
+    }, 5000);
+}
+
+function resetAutoSlide() {
+    clearInterval(slideInterval);
+    startAutoSlide();
+}
+
+startAutoSlide();
+
+
+
+//math quez
+function checkMathAnswer() {
+    const userVal = document.getElementById('userAnswer').value.trim();
+    const feedbackBox = document.getElementById('quizFeedback');
+    const solutionBox = document.getElementById('stepByStepSolution');
+    
+    // නිවැරදි පිළිතුර x = 5
+    const correctAnswer = "5";
+
+    if (userVal === "") {
+        alert("කරුණාකර පිළිතුරක් ඇතුළත් කරන්න!");
+        return;
+    }
+
+    if (userVal === correctAnswer) {
+        feedbackBox.className = "feedback-box correct";
+        feedbackBox.innerHTML = " නිවැරදියි! ඔබේ පිළිතුර හරි (x = 5).";
+    } else {
+        feedbackBox.className = "feedback-box incorrect";
+        feedbackBox.innerHTML = " පිළිතුර වැරදියි. පහත විසඳුම බලන්න.";
+    }
+
+    // Submit කළ පසු පියවරෙන් පියවර විසඳුම පෙන්වීම
+    solutionBox.style.display = "block";
+}
+
+
+
+//register form
+function sendToWhatsApp(event) {
+    event.preventDefault(); // Form එක සාමාන්‍ය පරිදි Reload වීම වළක්වයි
+
+    // Form එකෙන් Input අගයන් ලබා ගැනීම
+    const name = document.getElementById('studentName').value.trim();
+    const school = document.getElementById('studentSchool').value.trim();
+    const grade = document.getElementById('studentGrade').value;
+    const mode = document.getElementById('attendanceMode').value;
+
+    // සර්ගේ WhatsApp අංකය (Country code එක සමඟ +94 දමා ඇත)
+    const phoneNumber = "94772977291";
+
+    // WhatsApp එකට යැවෙන පණිවිඩය සකස් කිරීම
+    const message = `*නව පන්ති ලියාපදිංචිය - ගිහාන් සර්*%0A%0A` +
+                    ` *නම:* ${name}%0A` +
+                    ` *පාසල:* ${school}%0A` +
+                    ` *පන්තිය:* ${grade}%0A` +
+                    ` *සහභාගී වන ක්‍රමය:* ${mode}`;
+
+    // WhatsApp URL එක සාදා එය විවෘත කිරීම
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+    
+    window.open(whatsappURL, '_blank');
+}
+
+
+
+//animate web style
+document.addEventListener("DOMContentLoaded", function () {
+    // Scroll කරද්දී animate වෙන්න ඕන සියලුම Elements තෝරා ගැනීම
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    const observerOptions = {
+        root: null, // viewport එක භාවිතා කරයි
+        rootMargin: '0px',
+        threshold: 0.15 // Element එකෙන් 15%ක් පෙනුන සැනින් Animation එක පටන් ගනී
+    };
+
+    const observerCallback = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Screen එකට මතු වූ විට fade-in-visible class එක එකතු කරයි
+                entry.target.classList.add('fade-in-visible');
+                // වරක් animate වූ පසු නැවත observer එක ඉවත් කර ගත හැක (optional)
+                // observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    animatedElements.forEach(el => {
+        observer.observe(el);
+    });
+});
+
+
+</script>
+</body>
+</html>
